@@ -4,6 +4,6 @@ module and_beh_intra (
   output reg y
 );
   always @(*) begin
-    y = #2 a & b;
+    y = #3 a & b;
   end
 endmodule
