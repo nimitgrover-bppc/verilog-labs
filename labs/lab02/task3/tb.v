@@ -4,6 +4,8 @@ module tb;
     wire GT, LT, EQ;
     reg GT_ideal, LT_ideal, EQ_ideal;
 
+    integer errors;
+
     comp2 dut (.A(A), .B(B), .GT(GT), .LT(LT), .EQ(EQ));
 
     initial begin
@@ -20,17 +22,20 @@ module tb;
 
                 if (GT !== GT_ideal) begin
                     $display("Error in Greater Than (GT) comparison | A = %d, B = %d | Ideal output: %b, Real output: %b", A, B, GT_ideal, GT);
+                    errors = errors + 1;
                 end
                 if (LT !== LT_ideal) begin
                     $display("Error in Lesser Than (LT) comparison | A = %d, B = %d | Ideal output: %b, Real output: %b", A, B, LT_ideal, LT);
+                    errors = errors + 1;
                 end
                 if (EQ !== EQ_ideal) begin
                     $display("Error in Equal To (EQ) comparison | A = %d, B = %d | Ideal output: %b, Real output: %b", A, B, EQ_ideal, EQ);
+                    errors = errors + 1;
                 end
             end
         end
 
-        $display("Error detection done");
+        $display("Error detection done, number of errors = %d", errors);
         $finish;
     end
 
